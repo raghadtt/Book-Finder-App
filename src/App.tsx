@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import MainPage from "./pages/main";
@@ -6,9 +6,9 @@ import MainPage from "./pages/main";
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact component={MainPage} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+      </Routes>
     </Router>
   );
 }
