@@ -1,3 +1,5 @@
+import { SettingsPowerRounded } from "@material-ui/icons";
+import { useState } from "react";
 import styled from "styled-components";
 import background from "../assets/img/bookbg.jpg";
 import SearchBar from "./search";
@@ -21,12 +23,17 @@ const Text = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-function Header() {
+function Header(props) {
+  const setWord = (word) => {
+    console.log(word);
+    props.searchWord(word);
+  };
+
   return (
     <Wrapper>
       <Text>
         Book Finder
-        <SearchBar />
+        <SearchBar searchWord={setWord} />
       </Text>
     </Wrapper>
   );

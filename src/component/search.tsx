@@ -2,7 +2,7 @@ import { SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 
-import { getBooksByAuthor, getBooksByTitle } from "../api/books";
+import { getBooks } from "../api/books";
 
 const Search = styled.div`
   position: absolute;
@@ -16,24 +16,15 @@ const Input = styled.input`
   font-size: 1.4vw;
 `;
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [searchInput, setSearchInput] = useState("");
-  const [booksByAuthor, setBooksByAuthor] = useState([]);
-  const [booksByTitle, setBooksByTitle] = useState([]);
 
   const searchItems = (searchValue) => {
     setSearchInput(searchValue);
   };
 
-  const filterItem = async () => {
-    const { data } = await getBooksByAuthor(searchInput);
-    setBooksByAuthor(data.items);
-    filterItembyTitle();
-  };
-
-  const filterItembyTitle = async () => {
-    const { data } = await getBooksByTitle(searchInput);
-    setBooksByTitle(data.items);
+  const handleSearch = () => {
+    props.searchWord(searchInput);
   };
 
   return (
@@ -43,7 +34,7 @@ const SearchBar = () => {
         placeholder="Search for books"
         onChange={(e) => searchItems(e.target.value)}
       />
-      <button type="submit" onClick={filterItem}>
+      <button type="submit" onClick={handleSearch}>
         <FaSearch fontSize="1.5vw" color="#8b0000" />
       </button>
     </Search>
