@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { getBooks } from "../api/books";
-import { Book } from "../api/types/book";
-import Header from "../component/header";
-import Product from "../component/product";
+import { getBooks } from "api/books";
+import { Book } from "api/types/book";
+import Header from "component/header";
+import Product from "component/product";
 
 const Block = styled.div`
   display: flex;

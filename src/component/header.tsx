@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import background from "../assets/img/bookbg.jpg";
-import { HeaderProps } from "./props/HeaderProps";
+import background from "assets/img/bookbg.jpg";
 import SearchBar from "./search";
 
 const Wrapper = styled.header`
@@ -22,7 +21,7 @@ const Text = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Header: React.FC<HeaderProps> = ({ searchWord }) => {
+const Header: React.FC<{ searchWord: Function }> = ({ searchWord }) => {
   const setWord = (word: string) => {
     searchWord(word);
   };

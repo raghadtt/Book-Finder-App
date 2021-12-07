@@ -2,7 +2,7 @@ import { googleBooksApi } from "./googleApi";
 import { Book } from "./types/book";
 import { Volume } from "./types/volume";
 
-export const getBooks = (word) => {
+export const getBooks = (word: string) => {
   return googleBooksApi.get<Volume>("/volumes", {
     params: {
       q: word,
@@ -11,6 +11,6 @@ export const getBooks = (word) => {
   });
 };
 
-export const getBookInfo = (id) => {
+export const getBookInfo = (id: string) => {
   return googleBooksApi.get<Book>(`/volumes/${id}`);
 };

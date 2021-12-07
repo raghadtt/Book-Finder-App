@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
-import { SearchProps } from "./props/SearchProps";
 
 const Search = styled.section`
   position: absolute;
@@ -15,7 +14,7 @@ const Input = styled.input`
   font-size: 1.4vw;
 `;
 
-const SearchBar: React.FC<SearchProps> = ({ searchWord }) => {
+const SearchBar: React.FC<{ searchWord: Function }> = ({ searchWord }) => {
   const [searchInput, setSearchInput] = useState("");
 
   const searchItems = (searchValue) => {

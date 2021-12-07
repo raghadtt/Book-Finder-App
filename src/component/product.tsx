@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useGetBookById } from "../hooks/getBookbyId";
-import { ProductProps } from "./props/ProductProps";
+import { useGetBookById } from "hooks/getBookbyId";
 
 const ProductBlock = styled.div`
   flex: 1 1 30%;
@@ -44,7 +43,7 @@ const ImageBlock = styled.div`
   }
 `;
 
-const Product: React.FC<ProductProps> = ({ id }) => {
+const Product: React.FC<{ id: string }> = ({ id }) => {
   const bookInfo = useGetBookById(id);
 
   return (
@@ -54,14 +53,14 @@ const Product: React.FC<ProductProps> = ({ id }) => {
           <ImageBlock>
             <Link
               state={{
-                id: bookInfo?.id,
+                id: bookInfo.id,
               }}
               to={{
                 pathname: "/bookReview",
               }}
             >
               <Image
-                src={bookInfo?.volumeInfo.imageLinks.thumbnail}
+                src={bookInfo.volumeInfo.imageLinks.thumbnail}
                 alt=""
                 className="Image"
               />
@@ -71,7 +70,7 @@ const Product: React.FC<ProductProps> = ({ id }) => {
             </Link>
           </ImageBlock>
           <div>
-            <Title>{bookInfo?.volumeInfo.title}</Title>
+            <Title>{bookInfo.volumeInfo.title}</Title>
           </div>
         </ProductBlock>
       )}
