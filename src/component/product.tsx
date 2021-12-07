@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getBookInfo } from "../api/books";
+import { useGetBookById } from "../hooks/getBookbyId";
+import { ProductProps } from "./props/ProductProps";
 
 const ProductBlock = styled.div`
   flex: 1 1 30%;
@@ -26,12 +26,6 @@ const HoverText = styled.div`
   width: 100%;
 `;
 
-const SubTitle = styled.p`
-  color: #8b0000;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.2vw;
-  font-weight: bold;
-`;
 const Title = styled.p`
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1.5vw;
@@ -50,34 +44,24 @@ const ImageBlock = styled.div`
   }
 `;
 
-function Product(props) {
-  const [bookInfo, setBookInfo] = useState([]);
-
-  const getBookById = useCallback(async (id) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    const { data } = await getBookInfo(id);
-    setBookInfo(data);
-  }, []);
-
-  useEffect(() => {
-    getBookById(props.id);
-  }, [props.id, getBookById]);
+const Product: React.FC<ProductProps> = ({ id }) => {
+  const bookInfo = useGetBookById(id);
 
   return (
     <div>
-      {bookInfo.length !== 0 && (
+      {bookInfo && (
         <ProductBlock>
           <ImageBlock>
             <Link
               state={{
-                id: bookInfo["id"],
+                id: bookInfo?.id,
               }}
               to={{
                 pathname: "/bookReview",
               }}
             >
               <Image
-                src={bookInfo["volumeInfo"]["imageLinks"]["thumbnail"]}
+                src={bookInfo?.volumeInfo.imageLinks.thumbnail}
                 alt=""
                 className="Image"
               />
@@ -87,12 +71,12 @@ function Product(props) {
             </Link>
           </ImageBlock>
           <div>
-            <Title>{bookInfo["volumeInfo"]["title"]}</Title>
+            <Title>{bookInfo?.volumeInfo.title}</Title>
           </div>
         </ProductBlock>
       )}
     </div>
   );
-}
+};
 
 export default Product;

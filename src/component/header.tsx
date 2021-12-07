@@ -1,10 +1,9 @@
-import { SettingsPowerRounded } from "@material-ui/icons";
-import { useState } from "react";
 import styled from "styled-components";
 import background from "../assets/img/bookbg.jpg";
+import { HeaderProps } from "./props/HeaderProps";
 import SearchBar from "./search";
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   background-image: url(${background});
   height: 70vh;
   background-repeat: no-repeat;
@@ -23,10 +22,9 @@ const Text = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-function Header(props) {
-  const setWord = (word) => {
-    console.log(word);
-    props.searchWord(word);
+const Header: React.FC<HeaderProps> = ({ searchWord }) => {
+  const setWord = (word: string) => {
+    searchWord(word);
   };
 
   return (
@@ -37,6 +35,6 @@ function Header(props) {
       </Text>
     </Wrapper>
   );
-}
+};
 
 export default Header;

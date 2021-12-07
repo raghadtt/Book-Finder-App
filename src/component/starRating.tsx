@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
-export default function StarRating() {
+export const StarRating = () => {
   const [rating, setRating] = useState(0); // initial rating value
 
   // Catch Rating value
@@ -11,11 +11,11 @@ export default function StarRating() {
   };
 
   return (
-    <div>
+    <section>
       <Rating
         onClick={handleRating}
         ratingValue={rating} /* Available Props */
       />
-    </div>
+    </section>
   );
-}
+};

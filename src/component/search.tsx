@@ -1,10 +1,9 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
+import { SearchProps } from "./props/SearchProps";
 
-import { getBooks } from "../api/books";
-
-const Search = styled.div`
+const Search = styled.section`
   position: absolute;
   top: 100%;
   left: 50%;
@@ -16,7 +15,7 @@ const Input = styled.input`
   font-size: 1.4vw;
 `;
 
-const SearchBar = (props) => {
+const SearchBar: React.FC<SearchProps> = ({ searchWord }) => {
   const [searchInput, setSearchInput] = useState("");
 
   const searchItems = (searchValue) => {
@@ -24,7 +23,7 @@ const SearchBar = (props) => {
   };
 
   const handleSearch = () => {
-    props.searchWord(searchInput);
+    searchWord(searchInput);
   };
 
   return (
